@@ -13,7 +13,7 @@ This library provides unofficial Go clients for [OpenAI API](https://platform.op
 ## Installation
 
 ```
-go get github.com/sashabaranov/go-openai
+go get github.com/bincooo/go-openai
 ```
 Currently, go-openai requires Go version 1.18 or greater.
 
@@ -28,7 +28,7 @@ package main
 import (
 	"context"
 	"fmt"
-	openai "github.com/sashabaranov/go-openai"
+	openai "github.com/bincooo/go-openai"
 )
 
 func main() {
@@ -80,7 +80,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	openai "github.com/sashabaranov/go-openai"
+	openai "github.com/bincooo/go-openai"
 )
 
 func main() {
