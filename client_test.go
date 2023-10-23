@@ -203,7 +203,7 @@ func TestClientReturnsRequestBuilderErrors(t *testing.T) {
 			return client.CreateChatCompletion(ctx, ChatCompletionRequest{Model: GPT3Dot5Turbo})
 		}},
 		{"CreateChatCompletionStream", func() (any, error) {
-			return client.CreateChatCompletionStream(ctx, ChatCompletionRequest{Model: GPT3Dot5Turbo})
+			return client.CreateChatCompletionStream(ctx, ChatCompletionRequest{Model: GPT3Dot5Turbo}, nil)
 		}},
 		{"CreateFineTune", func() (any, error) {
 			return client.CreateFineTune(ctx, FineTuneRequest{})

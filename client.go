@@ -141,7 +141,7 @@ func (c *Client) sendRequestRaw(req *http.Request) (body io.ReadCloser, err erro
 	return resp.Body, nil
 }
 
-func sendRequestStream[T streamable](client *Client, req *http.Request) (*streamReader[T], error) {
+func sendRequestStream[T streamable](client *Client, req *http.Request, hook func(line []byte) error) (*streamReader[T], error) {
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Accept", "text/event-stream")
 	req.Header.Set("Cache-Control", "no-cache")
@@ -161,6 +161,7 @@ func sendRequestStream[T streamable](client *Client, req *http.Request) (*stream
 		errAccumulator:     utils.NewErrorAccumulator(),
 		unmarshaler:        &utils.JSONUnmarshaler{},
 		httpHeader:         httpHeader(resp.Header),
+		Hook:               hook,
 	}, nil
 }
 

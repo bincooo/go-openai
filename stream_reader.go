@@ -29,6 +29,8 @@ type streamReader[T streamable] struct {
 	unmarshaler    utils.Unmarshaler
 
 	httpHeader
+
+	Hook func(line []byte) error
 }
 
 func (stream *streamReader[T]) Recv() (response T, err error) {
@@ -82,6 +84,12 @@ func (stream *streamReader[T]) processLines() (T, error) {
 		if string(noPrefixLine) == "[DONE]" {
 			stream.isFinished = true
 			return *new(T), io.EOF
+		}
+
+		if stream.Hook != nil {
+			if err := stream.Hook(noPrefixLine); err != nil {
+				return *new(T), err
+			}
 		}
 
 		var response T

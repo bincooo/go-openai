@@ -30,7 +30,7 @@ func TestChatCompletionsStreamWrongModel(t *testing.T) {
 			},
 		},
 	}
-	_, err := client.CreateChatCompletionStream(ctx, req)
+	_, err := client.CreateChatCompletionStream(ctx, req, nil)
 	if !errors.Is(err, ErrChatCompletionInvalidModel) {
 		t.Fatalf("CreateChatCompletion should return ErrChatCompletionInvalidModel, but returned: %v", err)
 	}
@@ -71,7 +71,7 @@ func TestCreateChatCompletionStream(t *testing.T) {
 			},
 		},
 		Stream: true,
-	})
+	}, nil)
 	checks.NoError(t, err, "CreateCompletionStream returned error")
 	defer stream.Close()
 
@@ -166,7 +166,7 @@ func TestCreateChatCompletionStreamError(t *testing.T) {
 			},
 		},
 		Stream: true,
-	})
+	}, nil)
 	checks.NoError(t, err, "CreateCompletionStream returned error")
 	defer stream.Close()
 
@@ -206,7 +206,7 @@ func TestCreateChatCompletionStreamWithHeaders(t *testing.T) {
 			},
 		},
 		Stream: true,
-	})
+	}, nil)
 	checks.NoError(t, err, "CreateCompletionStream returned error")
 	defer stream.Close()
 
@@ -249,7 +249,7 @@ func TestCreateChatCompletionStreamWithRatelimitHeaders(t *testing.T) {
 			},
 		},
 		Stream: true,
-	})
+	}, nil)
 	checks.NoError(t, err, "CreateCompletionStream returned error")
 	defer stream.Close()
 
@@ -286,7 +286,7 @@ func TestCreateChatCompletionStreamErrorWithDataPrefix(t *testing.T) {
 			},
 		},
 		Stream: true,
-	})
+	}, nil)
 	checks.NoError(t, err, "CreateCompletionStream returned error")
 	defer stream.Close()
 
@@ -327,7 +327,7 @@ func TestCreateChatCompletionStreamRateLimitError(t *testing.T) {
 			},
 		},
 		Stream: true,
-	})
+	}, nil)
 	var apiErr *APIError
 	if !errors.As(err, &apiErr) {
 		t.Errorf("TestCreateChatCompletionStreamRateLimitError did not return APIError")
@@ -366,7 +366,7 @@ func TestAzureCreateChatCompletionStreamRateLimitError(t *testing.T) {
 			},
 		},
 		Stream: true,
-	})
+	}, nil)
 	if !errors.As(err, &apiErr) {
 		t.Errorf("Did not return APIError: %+v\n", apiErr)
 		return

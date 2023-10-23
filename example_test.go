@@ -53,6 +53,7 @@ func ExampleClient_CreateChatCompletionStream() {
 			},
 			Stream: true,
 		},
+		nil,
 	)
 	if err != nil {
 		fmt.Printf("ChatCompletionStream error: %v\n", err)
