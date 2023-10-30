@@ -88,6 +88,8 @@ type ChatCompletionRequest struct {
 	User         string               `json:"user,omitempty"`
 	Functions    []FunctionDefinition `json:"functions,omitempty"`
 	FunctionCall any                  `json:"function_call,omitempty"`
+	// for fastgpt
+	Variables any `json:"variables"`
 }
 
 type FunctionDefinition struct {
